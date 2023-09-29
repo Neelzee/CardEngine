@@ -35,14 +35,11 @@ library
       GameData.LoadGD
       GameData.SaveGD
       Constants
-      CDSL.ParseCDSLExpr
-      CDSL.CDSLExpr
-      CDSL.ExecCDSLExpr
-      CDSL.CDSLValidater
-      CDSL.CDSLLexer
-      CDSL.CDSLAST
-      CDSL.CDSLTokenizer
-      CDSL.CDSLParser
+      CDSL.Expr
+      CDSL.Eval
+      CDSL.Error
+      CDSL.Procedure
+      CDSL.Scope
       Feature
       LoadGame
       Terminal.GameCommands

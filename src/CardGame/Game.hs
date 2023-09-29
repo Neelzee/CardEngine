@@ -13,7 +13,6 @@ import CardGame.Card ( Card )
 import Data.CircularList ( CList, empty )
 import Feature (Feature)
 import CardGame.PlayerMove (Move)
-import CDSL.CDSLExpr (CDSLExpr)
 
 data GameState = Start | TurnStart | TurnEnd | RoundStart | RoundEnd | End
     deriving (Show, Eq)
@@ -23,17 +22,17 @@ data Game = Game {
     , playerMoves :: [(Move, Bool)]
     , cardGen :: [Card]
     , discard :: [Card]
-    , turnOrder :: [CDSLExpr]
-    , cardSuits :: [CDSLExpr]
-    , cardRanks :: [CDSLExpr]
-    , cardEffects :: [((Feature, Maybe [CDSLExpr]), [CDSLExpr])]
+    , turnOrder :: [Game]
+    , cardSuits :: [Game]
+    , cardRanks :: [Game]
+    , cardEffects :: [((Feature, Maybe [Game]), [Game])]
     , deck :: [Card]
     , pile :: [(Card, Maybe Card)]
     , players :: CList Player
     , endCon :: [Game -> Bool]
     , winCon :: [Game -> [Player]]
     , state :: GameState
-    , rules :: [(Feature, [CDSLExpr])]
+    , rules :: [(Feature, [Game])]
     , actions :: [(GameState, [(Game -> IO Game, Bool)])]
     , canPlaceCard :: [Game -> Card -> Bool]
 }

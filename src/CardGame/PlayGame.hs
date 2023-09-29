@@ -10,19 +10,13 @@ import CardGame.Player ( createPlayers, Player (name, moves, hand, pScore, moves
 import Text.Read (readMaybe)
 import Data.List (find, intercalate)
 import Feature ( Feature(..) )
-import CDSL.CDSLExpr (CDSLExpr(Numeric), CardEffect (ChangeCard, SwapHand, TakeFromHand, GiveCard, PassNext, DrawCards))
-import LoadGame (loadGame)
 import Functions (lookupAll, removeFirst, count, dropFilteredCount, unique, removeLookupAll, remLst, elemLst)
 import CardGame.PlayerMove (Move(PlayCard, DrawCard, Pass, DiscardCard))
 import System.IO ( hFlush, stdout )
 import CardGame.PlayCommands (validatePLCommand, PLCommand (plc), UserActions (..), printUACommands)
 import CardGame.Game (GameState (Start, TurnEnd, TurnStart), dealCards, gameActions, createEmptyGame, Game (..))
 import CardGame.Card (Card)
-import CDSL.ExecCDSLExpr (execCardEffect, execCDSLGame)
-import CardGame.CardFunctions (prettyPrintCards, cardElem)
-import CDSL.ParseCDSLExpr (exprToCard)
 import Data.Maybe (mapMaybe)
-import CDSL.CDSLValidater (getAllCards)
 
 gameLoop :: Game -> IO Game
 gameLoop g = do
