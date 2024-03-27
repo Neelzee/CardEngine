@@ -1,81 +1,35 @@
-GAME() {
-    WIN_CON = max(PLAYERS);
+/*
+ * This is the Game class, it will be initialized 
+ *
+ * Game states:
+ * Turn:
+ *  Each player has a turn, so there is a pre-, and post-turn states
+ * Round:
+ *  A round is after every player has done their turn (unless otherwise specified), there are pre-, and post-round states.
+ */
+class YourGame extends CardGame {
+  // Logic that runs on the start of the game
+  fn pre_start(game: CardGame) -> CardGame {}
+
+  // Logic that runs before every turn start
+  fn turn_start(game: CardGame) -> CardGame {}
+
+   // Logic that runs after every turn start
+  fn turn_end(game: CardGame) -> CardGame {}
+
+  // Logic that runs before every round start
+  fn turn_start(game: CardGame) -> CardGame {}
+  fn round_start(game: CardGame) -> CardGame {}
+
+  // Logic that runs before every round end 
+  fn round_end(game: CardGame) -> CardGame {}
+
+  // Returns true if the game is over
+  fn is_game_over(game: CardGame) -> bool {
+
+  }
 }
 
+class YourCard extends Card {
 
-CARD() {
-    list<string> card_suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
-    list<string> card_ranks = [
-        "Ace", "Two", "Three", "Four", "Six", "Seven", "Eight
-        "Nine", "Ten", "Jack", "Queen", "King"];
-    list<int> card_score = [1..len(card_ranks)];
-
-    list<Card> cards = [];
-    
-    for (string suit : card_suits) {
-        for (int i = 0; i < len(card_ranks); i += 1) {
-            Card card = Card(suit, card_ranks.get(i), card_score.get(i));
-            cards.add(card);
-        }
-    }
-
-
-    CARDS = cards;
-
-}
-
-
-PLAYER() {
-    HAND_MAX = 4;
-    MOVES = [
-        (PLAY, true, 1),
-        (DRAW, false, 3),
-        (PASS, true, 1)
-    ];
-}
-
-
-TURN_END(
-    player: Player,
-    move: Move,
-    next_player: Player
-)
-{
-    player.moves = MOVES;
-
-    list<Card> cards = PILE.getRange(0, 4);
-
-    if (all(cards, ==)) {
-        PILE.removeRange(0, 4);
-        DISCARD.addRange(cards);
-        TURN_POINTER.goBack();
-
-    } else {
-        TURN_POINTER.goForward();
-    }
-
-}
-
-TURN_START() {
-    if (len(PILE) == 0 && len(DECK) != 0) {
-        PILE.addRange(DECK.pop(0));
-    }
-
-    if (len(DECK) == 0 && len(PILE) != 0) {
-        DECK.addRange(PILE.popRange(1, len(PILE) - 1));
-        DECK.shuffle();
-    }
-}
-
-GAME_START() {
-    DECK = CARD.getRange(0, 52);
-    DECK.shuffle();
-    int cardCount = 3;
-    for (int i = 0; i < cardCount; i++) {
-        for (Player plr : PLAYERS) {
-            plr.hand.add(DECK.pop(0));
-        }
-    }
-
-    PILE.add(DECK.pop(0));
 }
